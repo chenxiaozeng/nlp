@@ -30,17 +30,34 @@ PaddleNLP提供**开箱即用**的产业级NLP预置任务能力，无需训练�
 
 | 任务名称  | 调用方式  | 一键预测 | 单条输入 | 多条输入 | 无限长度输入 | 定制化训练 | 其它特性 | 
 | :------------  | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
-| [中文分词](#中文分词) | `Taskflow("word_segmentation")` | ✅ | ✅ | ✅ | ✅ | ✅ | 多种分词模式，满足快速切分和实体粒度精准切分 | 
+| [中文分词](#中文分词) | `Taskflow("word_segmentation")` | ✅ | ✅ | ✅ | ✅ | ✅ | 多种分词模式，自定义词典 | 
 | [词性标注](#词性标注) | `Taskflow("pos_tagging")` | ✅ | ✅ | ✅ | ✅ | ✅ | 集成前沿词法分析工具LAC | 
 | [命名实体识别](#命名实体识别)  | `Taskflow("ner")` | ✅ | ✅ | ✅ | ✅ | ✅ | 覆盖最全中文实体标签 | 
-| [依存句法分析](#依存句法分析)|  `Taskflow("dependency_parsing")` | ✅ | ✅ | ✅ |  | ✅ | 集成百度依存句法分析工具DDParser  | 
-| [『解语』-知识标注](#解语知识标注) | `Taskflow("knowledge_mining")` | ✅ | ✅ | ✅ | ✅ | ✅ | 覆盖所有中文词汇的知识标注工具  |
-| [文本纠错](#文本纠错) | `Taskflow("text_correction")` | ✅ | ✅ | ✅ | ✅ | ✅ | 基于文本纠错模型CSC-ERNIE达到业界SOTA| 
-| [文本相似度](#文本相似度) |  `Taskflow("text_similarity")` | ✅ | ✅ | ✅ |  |  | 基于SimBERT达到前沿文本相似效果 |
-| [情感倾向分析](#情感倾向分析) |  `Taskflow("sentiment_analysis")` | ✅ | ✅ | ✅ |  | ✅  | 基于情感分析模型SKEP达到业界SOTA | 
-| [生成式问答](#生成式问答) |  `Taskflow("question_answering")` | ✅ | ✅ | ✅ |  |  | 使用最大中文开源GPT模型完成问答 | 
-| [智能写诗](#智能写诗)  |  `Taskflow("poetry_generation")` | ✅ | ✅ | ✅ |  |  | 使用最大中文开源GPT模型完成写诗 | 
+| [依存句法分析](#依存句法分析)|  `Taskflow("dependency_parsing")` | ✅ | ✅ | ✅ |  | ✅ | 集成前沿句法分析工具DDParser  | 
+| [解语-知识标注](#解语知识标注) | `Taskflow("knowledge_mining")` | ✅ | ✅ | ✅ | ✅ | ✅ | 覆盖所有中文词汇的知识标注工具  |
+| [文本纠错](#文本纠错) | `Taskflow("text_correction")` | ✅ | ✅ | ✅ | ✅ | ✅ | 基于CSC-ERNIE达到业界SOTA| 
+| [文本相似度](#文本相似度) |  `Taskflow("text_similarity")` | ✅ | ✅ | ✅ |  |  | 基于SimBERT达到领先文效果 |
+| [情感倾向分析](#情感倾向分析) |  `Taskflow("sentiment_analysis")` | ✅ | ✅ | ✅ |  | ✅  | 基于情感分析模型SKEP达SOTA | 
+| [生成式问答](#生成式问答) |  `Taskflow("question_answering")` | ✅ | ✅ | ✅ |  |  | 使用最大中文GPT模型完成问答 | 
+| [智能写诗](#智能写诗)  |  `Taskflow("poetry_generation")` | ✅ | ✅ | ✅ |  |  | 使用最大中文GPT模型完成写诗 | 
 | [开放域对话](#开放域对话) |  `Taskflow("dialogue")` | ✅ | ✅ | ✅ |  | ✅ | 十亿级语料训练最强中文闲聊模型PLATO-Mini，支持多轮对话 |
+
+
+| 任务名称  | 调用方式  | 一键预测 | 单条输入 | 多条输入 | 无限长度输入 | 定制化训练 | 其它特性 | 
+| :------------  | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| [中文分词](#中文分词) | `Taskflow("word_segmentation")` | ✅ | ✅ | ✅ | ✅ | ✅ | 多种分词模式 | 
+| [词性标注](#词性标注) | `Taskflow("pos_tagging")` | ✅ | ✅ | ✅ | ✅ | ✅ | 集成前沿词法分析 | 
+| [命名实体识别](#命名实体识别)  | `Taskflow("ner")` | ✅ | ✅ | ✅ | ✅ | ✅ | 覆盖最全中文实体标签 | 
+| [依存句法分析](#依存句法分析)|  `Taskflow("dependency_parsing")` | ✅ | ✅ | ✅ |  | ✅ |   | 
+| [解语-知识标注](#解语知识标注) | `Taskflow("knowledge_mining")` | ✅ | ✅ | ✅ | ✅ | ✅ |   |
+| [文本纠错](#文本纠错) | `Taskflow("text_correction")` | ✅ | ✅ | ✅ | ✅ | ✅ | 基于CSC-| 
+| [文本相似度](#文本相似度) |  `Taskflow("text_similarity")` | ✅ | ✅ | ✅ |  |  |  |
+| [情感倾向分析](#情感倾向分析) |  `Taskflow("sentiment_analysis")` | ✅ | ✅ | ✅ |  | ✅  |  | 
+| [生成式问答](#生成式问答) |  `Taskflow("question_answering")` | ✅ | ✅ | ✅ |  |  |  | 
+| [智能写诗](#智能写诗)  |  `Taskflow("poetry_generation")` | ✅ | ✅ | ✅ |  |  |  | 
+| [开放域对话](#开放域对话) |  `Taskflow("dialogue")` | ✅ | ✅ | ✅ |  | ✅ | -Mini，支持多轮对话 |
+
+
 
 
 ## QuickStart
