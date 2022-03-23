@@ -1,5 +1,33 @@
 ### NER
 
+主readme
+```python
+from paddlenlp import Taskflow
+
+# 中文分词
+seg = Taskflow("word_segmentation")
+seg("第十四届全运会在西安举办")
+>>> ['第十四届', '全运会', '在', '西安', '举办']
+
+# 命名实体识别
+ner = Taskflow("ner", mode="accurate", entity_only=True)
+ner("谷爱凌拿下北京冬奥会自由式滑雪项目的冠军")
+>>> [('谷爱凌', '人物类_实体'), ('拿下', '场景事件'), ('北京冬奥会', '文化类_奖项赛事活动'), ('自由式滑雪', '事件类'), ('项目', '信息资料'), ('冠军', '人物类_概念')]
+
+# 情感分析
+senta = Taskflow("sentiment_analysis")
+senta("这个产品用起来真的很流畅，我非常喜欢")
+>>> [{'text': '这个产品用起来真的很流畅，我非常喜欢', 'label': 'positive', 'score': 0.9938690066337585}]
+
+# 文本相似度
+from paddlenlp import Taskflow
+similarity = Taskflow("text_similarity")
+similarity([["春天适合种什么花？", "春天适合种什么菜？"]])
+>>> [{'text1': '春天适合种什么花？', 'text2': '春天适合种什么菜？', 'similarity': 0.8340253}]
+```
+更多使用方法请参考[Taskflow文档](./docs/model_zoo/taskflow.md)。
+
+
 ```python
 
 
