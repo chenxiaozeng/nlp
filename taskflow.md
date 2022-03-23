@@ -24,22 +24,22 @@
 
 ## 特性
 PaddleNLP提供**开箱即用**的产业级NLP预置任务能力，无需训练，一键预测。
-- 统一的应用范式：通过`paddlenlp.Taskflow`调用，简捷易用；
 - 最全的中文任务：覆盖自然语言理解与自然语言生成两大核心应用；
-- 极致的产业级效果：在多个中文场景上提供产业级的精度与预测性能。
+- 极致的产业级效果：在多个中文场景上提供产业级的精度与预测性能；
+- 统一的应用范式：通过`paddlenlp.Taskflow`调用，简捷易用。
 
-| 任务名称  | 调用方式  | 一键预测 | 单条输入 | 多条输入 | 无限长度输入 | 定制化训练 | 其它特性 | 
+| 任务名称  | 调用方式  | 一键预测 | 单条输入 | 多条输入 | 文档级输入 | 定制化训练 | 其它特性 | 
 | :------------  | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | [中文分词](#中文分词) | `Taskflow("word_segmentation")` | ✅ | ✅ | ✅ | ✅ | ✅ | 多种分词模式，满足快速切分和实体粒度精准切分 | 
-| [词性标注](#词性标注) | `Taskflow("pos_tagging")` | ✅ | ✅ | ✅ | ✅ | ✅ | 集成前沿词法分析工具LAC | 
+| [词性标注](#词性标注) | `Taskflow("pos_tagging")` | ✅ | ✅ | ✅ | ✅ | ✅ |  |  基于百度前沿词法分析工具LAC | 
 | [命名实体识别](#命名实体识别)  | `Taskflow("ner")` | ✅ | ✅ | ✅ | ✅ | ✅ | 覆盖最全中文实体标签 | 
-| [依存句法分析](#依存句法分析)|  `Taskflow("dependency_parsing")` | ✅ | ✅ | ✅ |  | ✅ | 集成百度依存句法分析工具DDParser  | 
+| [依存句法分析](#依存句法分析)|  `Taskflow("dependency_parsing")` | ✅ | ✅ | ✅ |  | ✅ | 基于最大规模中文依存句法树库研发的DDparser  | 
 | [『解语』-知识标注](#解语知识标注) | `Taskflow("knowledge_mining")` | ✅ | ✅ | ✅ | ✅ | ✅ | 覆盖所有中文词汇的知识标注工具  |
-| [文本纠错](#文本纠错) | `Taskflow("text_correction")` | ✅ | ✅ | ✅ | ✅ | ✅ | 基于文本纠错模型CSC-ERNIE达到业界SOTA| 
-| [文本相似度](#文本相似度) |  `Taskflow("text_similarity")` | ✅ | ✅ | ✅ |  |  | 基于SimBERT达到前沿文本相似效果 |
-| [情感倾向分析](#情感倾向分析) |  `Taskflow("sentiment_analysis")` | ✅ | ✅ | ✅ |  | ✅  | 基于情感分析模型SKEP达到业界SOTA | 
-| [生成式问答](#生成式问答) |  `Taskflow("question_answering")` | ✅ | ✅ | ✅ |  |  | 使用最大中文开源GPT模型完成问答 | 
-| [智能写诗](#智能写诗)  |  `Taskflow("poetry_generation")` | ✅ | ✅ | ✅ |  |  | 使用最大中文开源GPT模型完成写诗 | 
+| [文本纠错](#文本纠错) | `Taskflow("text_correction")` | ✅ | ✅ | ✅ | ✅ | ✅ | 融合拼音特征的端到端文本纠错模型CSC-ERNIE | 
+| [文本相似度](#文本相似度) |  `Taskflow("text_similarity")` | ✅ | ✅ | ✅ |  |  | 基于百度知道2200万对相似句组训练 |
+| [情感倾向分析](#情感倾向分析) |  `Taskflow("sentiment_analysis")` | ✅ | ✅ | ✅ |   | ✅  | 基于情感知识增强预训练模型SKEP达到业界SOTA | 
+| [生成式问答](#生成式问答) |  `Taskflow("question_answering")` | ✅ | ✅ | ✅ |  |  | 使用最大中文开源CPM模型完成问答 | 
+| [智能写诗](#智能写诗)  |  `Taskflow("poetry_generation")` | ✅ | ✅ | ✅ |  |  | 使用最大中文开源CPM模型完成写诗 | 
 | [开放域对话](#开放域对话) |  `Taskflow("dialogue")` | ✅ | ✅ | ✅ |  | ✅ | 十亿级语料训练最强中文闲聊模型PLATO-Mini，支持多轮对话 |
 
 
@@ -57,7 +57,7 @@ PaddleNLP提供**开箱即用**的产业级NLP预置任务能力，无需训练�
 微信扫描下方二维码加入官方交流群，与各行各业开发者充分交流，期待你的加入⬇️
 
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/11793384/157790710-cfad5c8a-0edd-49d7-9711-eb1c683a687c.png" width="188" height="188" />
+  <img src="https://raw.githubusercontent.com/PaddlePaddle/PaddleNLP/release/2.2/docs/imgs/wechat.png" width="188" height="188" />
 </div>
 
 ## 详细使用
@@ -65,7 +65,7 @@ PaddleNLP提供**开箱即用**的产业级NLP预置任务能力，无需训练�
 
 ### 中文分词 
 
-<details><summary>&emsp;（可展开详情）多种分词模式，满足快速切分和实体粒度精准切分</summary><div>
+<details><summary>&emsp;（可展开详情）多种分词模式，满足快速切分和实体粒度精准切分 </summary><div>
   
 #### 三种分词模式，满足各类分词需求
 
@@ -294,7 +294,7 @@ from paddlenlp import Taskflow
 
 
 ### 依存句法分析
-<details><summary>&emsp;基于百度依存句法分析工具DDParser</summary><div>
+<details><summary>&emsp;基于最大规模中文依存句法树库研发的DDparser </summary><div>
 
  #### 支持多种格式输入
 
@@ -442,7 +442,7 @@ nptag(["糖醋排骨", "红曲霉菌"])
 </div></details>
 
 ### 文本纠错
-<details><summary>&emsp;基于文本纠错模型CSC-ERNIE达到业界SOTA</summary><div>
+<details><summary>&emsp;融合拼音特征的端到端文本纠错模型CSC-ERNIE</summary><div>
 
 #### 支持单条、批量预测
 
@@ -465,7 +465,7 @@ nptag(["糖醋排骨", "红曲霉菌"])
 </div></details>
 
 ### 文本相似度
-<details><summary>&emsp;基于SimBERT达到前沿文本相似效果</summary><div>
+<details><summary>&emsp;基于百度知道2200万对相似句组训练SimBERT达到前沿文本相似效果</summary><div>
 
 #### 单条输入
 
@@ -491,7 +491,7 @@ nptag(["糖醋排骨", "红曲霉菌"])
 </div></details>
 
 ### 情感倾向分析
-<details><summary>&emsp基于情感分析模型SKEP达到业界SOTA</summary><div>
+<details><summary>&emsp基于情感知识增强预训练模型SKEP达到业界SOTA </summary><div>
   
 #### 支持不同模型，快速和精度两种模式
 
@@ -522,7 +522,7 @@ nptag(["糖醋排骨", "红曲霉菌"])
 </div></details>
 
 ### 生成式问答
-<details><summary>&emsp;基于....</summary><div>
+<details><summary>&emsp; 使用最大中文开源CPM模型完成问答</summary><div>
 
 #### 支持单条、批量预测
 
@@ -542,7 +542,7 @@ nptag(["糖醋排骨", "红曲霉菌"])
 </div></details>
 
 ### 智能写诗
-<details><summary>&emsp;基于....</summary><div>
+<details><summary>&emsp; 使用最大中文开源CPM模型完成写诗 </summary><div>
 
 #### 支持单条、批量预测
 
