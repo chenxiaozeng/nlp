@@ -16,7 +16,7 @@
   <a href=#社区交流> 社区交流 </a> |
   <a href=#详细使用> 一键预测&定制训练 </a> |
   <a href=#指标说明> 指标说明 </a> |
-  <a href=#FAQ> FAQ </a> |
+  <a href=#FAQ> FAQ </a>
 </h4>
 
 
