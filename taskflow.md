@@ -62,6 +62,9 @@ PaddleNLP提供**开箱即用**的产业级NLP预置任务能力，无需训练�
 </div>
 
 ## 详细使用
+
+可进入Jupyter Notebook环境，在线体验 👉🏻  [进入在线运行环境](https://aistudio.baidu.com/aistudio/projectdetail/3494205)
+
 ## PART Ⅰ &emsp; 一键预测 
 
 ### 中文分词 
@@ -74,16 +77,19 @@ PaddleNLP提供**开箱即用**的产业级NLP预置任务能力，无需训练�
 from paddlenlp import Taskflow
 
 # 默认模式————实体粒度分词，在精度和速度上的权衡，基于百度LAC
+# 单句平均耗时：1.67ms
 >>> seg = Taskflow("word_segmentation")
 >>> seg("近日国家卫健委发布第九版新型冠状病毒肺炎诊疗方案")
 ['近日', '国家卫健委', '发布', '第九版', '新型', '冠状病毒肺炎', '诊疗', '方案']
 
 # 快速模式————最快：实现文本快速切分，基于jieba中文分词工具
+# 单句平均耗时：0.37ms
 >>> seg_fast = Taskflow("word_segmentation", mode="fast")
 >>> seg_fast("近日国家卫健委发布第九版新型冠状病毒肺炎诊疗方案")
 ['近日', '国家', '卫健委', '发布', '第九版', '新型', '冠状病毒', '肺炎', '诊疗', '方案']
 
 # 精确模式————最准：实体粒度切分准确度最高，基于百度解语
+# 单句平均耗时：258.06ms（精确模式基于预训练模型，更适合实体粒度分词需求，适用于知识图谱构建、企业搜索Query分析等场景中，可通过模型压缩等方式提升预测性能）
 >>> seg_accurate = Taskflow("word_segmentation", mode="accurate") 
 >>> seg_accurate("近日国家卫健委发布第九版新型冠状病毒肺炎诊疗方案")
 ['近日', '国家卫健委', '发布', '第九版', '新型冠状病毒肺炎', '诊疗', '方案']
@@ -492,7 +498,7 @@ nptag(["糖醋排骨", "红曲霉菌"])
 </div></details>
 
 ### 情感倾向分析
-<details><summary>&emsp基于情感知识增强预训练模型SKEP达到业界SOTA </summary><div>
+<details><summary>&emsp;基于情感知识增强预训练模型SKEP达到业界SOTA </summary><div>
   
 #### 支持不同模型，快速和精度两种模式
 
@@ -603,8 +609,6 @@ nptag(["糖醋排骨", "红曲霉菌"])
 * `max_turn`：任务能记忆的对话轮数，当max_turn为1时，模型只能记住当前对话，无法获知之前的对话内容。
 </div></details>
 
-
-[在线运行](https://aistudio.baidu.com/aistudio/projectdetail/3494205)
   
 ## PART Ⅱ &emsp; 定制化训练
 
@@ -622,7 +626,6 @@ nptag(["糖醋排骨", "红曲霉菌"])
 |`Taskflow("dependency_parsing", model="ddparser")`|`$HOME/.paddlenlp/taskflow/dependency_parsing/ddparser`|[示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/dependency_parsing/ddparser)|
 |`Taskflow("dependency_parsing", model="ddparser-ernie-1.0")`|`$HOME/.paddlenlp/taskflow/dependency_parsing/ddparser-ernie-1.0`|[示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/dependency_parsing/ddparser)|
 |`Taskflow("dependency_parsing", model="ddparser-ernie-gram-zh")`|`$HOME/.paddlenlp/taskflow/dependency_parsing/ddparser-ernie-gram-zh`|[示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/dependency_parsing/ddparser)|
-|`Taskflow("sentiment_analysis", model="bilstm")`|`$HOME/.paddlenlp/taskflow/sentiment_analysis/bilstm`|暂无|
 |`Taskflow("sentiment_analysis", model="skep_ernie_1.0_large_ch")`|`$HOME/.paddlenlp/taskflow/sentiment_analysis/skep_ernie_1.0_large_ch`|[示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/sentiment_analysis/skep)|
 |`Taskflow("knowledge_mining", model="wordtag")`|`$HOME/.paddlenlp/taskflow/knowledge_mining/wordtag`|[示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/ernie-ctm)|
 |`Taskflow("knowledge_mining", model="nptag")`|`$HOME/.paddlenlp/taskflow/knowledge_mining/nptag`|[示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/nptag)|
@@ -668,16 +671,11 @@ my_ner = Taskflow("ner", mode="accurate", task_path="./custom_task_path/")
   
 ### 分词
 
-我们选择市面上流行的几款分词工具，通过各个工具提供的训练接口在三个开源数据集MSR、WEIBO、PKU上微调训练，对模型效果进行评测。可以看到，基于百度解语的分词工具（模式3-精确模式）效果最优。
+我们选择市面上流行的几款分词工具，通过各个工具提供的训练接口在两个个开源数据集MSR、WEIBO上微调训练，对模型效果进行评测。可以看到，基于百度解语的分词工具（模式3-精确模式）效果最优。
   
 备注：采用数据集微调训练后再评估，是因为目前分词结果并没有统一的标准，比如人名“张三”，MSR数据集切分时会将其作为一个完整的单词，而工具A数据集标准则认为姓和名需要进行切分，故而会切分为“张  三”。不同标准导致结果差异大，故而通过微调训练使得模型在一个分词标准下进行比较。
 
-| 数据集 | Precision| Recall | F1-Score | 
-| :---: | :---: | :---: | :---: |
-| jieba | 87.01 | 89.88 | 88.42 |
-| THULAC | 95.60 | 95.91 | 95.71 | 
-| Taskflow-base | 96.62 | 96.52 | 96.57 | 
-| Taskflow-accurate | 97.42 | 97.55 | 97.48 | 
+![image](https://user-images.githubusercontent.com/11793384/159696738-b409bcdb-24c7-45e0-80c1-8d8d362314b5.png)
   
 ### 命名实体识别
   
