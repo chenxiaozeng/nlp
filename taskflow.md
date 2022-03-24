@@ -645,8 +645,10 @@ nptag(["糖醋排骨", "红曲霉菌"])
 | `Taskflow("sentiment_analysis", model="skep_ernie_1.0_large_ch")` | `$HOME/.paddlenlp/taskflow/sentiment_analysis/skep_ernie_1.0_large_ch` | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/sentiment_analysis/skep) |
 |       `Taskflow("knowledge_mining", model="wordtag")`        |     `$HOME/.paddlenlp/taskflow/knowledge_mining/wordtag`     | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/ernie-ctm) |
 |        `Taskflow("knowledge_mining", model="nptag")`         |      `$HOME/.paddlenlp/taskflow/knowledge_mining/nptag`      | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/nptag) |
-|                       </div></details>                       |                                                              |                                                              |
+  
+</div></details>    
 
+  
 <details><summary>定制化训练示例</summary><div>
 
 这里我们以命名实体识别`Taskflow("ner", mode="accurate")`为例，展示如何定制自己的模型。
@@ -680,10 +682,11 @@ my_ner = Taskflow("ner", mode="accurate", task_path="./custom_task_path/")
 ```
 </div></details>
 
+  
 ## FAQ
 
 <details><summary><b>Q：</b>Taskflow如何修改任务保存路径？</summary><div>
-
+  
 **A:** Taskflow默认会将任务相关模型等文件保存到`$HOME/.paddlenlp`下，可以在任务初始化的时候通过`home_path`自定义修改保存路径。示例：
 ```python
 from paddlenlp import Taskflow
@@ -695,13 +698,14 @@ ner = Taskflow("ner", home_path="/workspace")
 
 
 <details><summary><b>Q：</b>下载或调用模型失败，多次下载均失败怎么办？</summary><div>
-
+  
 **A:** Taskflow默认会将任务相关模型等文件保存到`$HOME/.paddlenlp/taskflow`下，如果下载或调用失败，可删除相应路径下的文件，重新尝试即可
 
 </div></details>
 
 
 <details><summary><b>Q：</b>后续会增加更多任务支持吗？</summary><div>
+  
 **A:** Taskflow支持任务持续丰富中，我们将根据开发者反馈，灵活调整功能建设优先级，可通过Issue或[问卷](https://wenjuan.baidu-int.com/manage/?r=survey/pageEdit&sid=85827)反馈给我们。
 
 </div></details>
