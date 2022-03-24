@@ -710,8 +710,10 @@ ner = Taskflow("ner", home_path="/workspace")
 
 </div></details>
 
+
+## 附录
   
-<details><summary><b>附：</b>参考资料 </summary><div>
+<details><summary><b>参考资料</b> </summary><div>
   
 1. [fxsjy/jieba](https://github.com/fxsjy/jieba)
 2. [ZhuiyiTechnology/simbert]( https://github.com/ZhuiyiTechnology/simbert)
