@@ -767,4 +767,3 @@ ner = Taskflow("ner", home_path="/workspace")
 1. [fxsjy/jieba](https://github.com/fxsjy/jieba)
 2. [ZhuiyiTechnology/simbert]( https://github.com/ZhuiyiTechnology/simbert)
 3. [CPM: A Large-scale Generative Chinese Pre-trained Language Model](https://arxiv.org/abs/2012.00413)
-
