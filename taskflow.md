@@ -12,7 +12,6 @@
 </p>
 
 
-
 <h4 align="center">
   <a href=#QuickStart> QuickStart </a> |
   <a href=#社区交流> 社区交流 </a> |
@@ -25,9 +24,7 @@
 ------------------------------------------------------------------------------------------
 
 ## 特性
-
 PaddleNLP提供**开箱即用**的产业级NLP预置任务能力，无需训练，一键预测。
-
 - 最全的中文任务：覆盖自然语言理解与自然语言生成两大核心应用；
 - 极致的产业级效果：在多个中文场景上提供产业级的精度与预测性能；
 - 统一的应用范式：通过`paddlenlp.Taskflow`调用，简捷易用。
@@ -50,7 +47,6 @@ PaddleNLP提供**开箱即用**的产业级NLP预置任务能力，无需训练�
 ## QuickStart
 
 **环境依赖**
-
   - python >= 3.6
   - paddlepaddle >= 2.2.0
   - paddlenlp >= 2.2.5
@@ -66,7 +62,6 @@ PaddleNLP提供**开箱即用**的产业级NLP预置任务能力，无需训练�
   <img src="https://raw.githubusercontent.com/PaddlePaddle/PaddleNLP/release/2.2/docs/imgs/wechat.png" width="188" height="188" />
 </div>
 
-
 ## 详细使用
 
 可进入 Jupyter Notebook 环境，在线体验 👉🏻  [进入在线运行环境](https://aistudio.baidu.com/aistudio/projectdetail/3494205)
@@ -78,7 +73,6 @@ Taskflow支持任务持续丰富中，我们将根据开发者反馈，灵活调
 ### 中文分词 
 
 <details><summary>&emsp;（可展开详情）多种分词模式，满足快速切分和实体粒度精准切分 </summary><div>
-
 
 #### 三种分词模式，满足各类分词需求
 
@@ -119,7 +113,6 @@ from paddlenlp import Taskflow
 
 你可以通过传入`user_dict`参数，装载自定义词典来定制分词结果。
 在默认模式和精确模式下，词典文件每一行由一个或多个自定义item组成。词典文件`user_dict.txt`示例：
-
 ```text
 平原上的火焰
 上
@@ -133,7 +126,6 @@ from paddlenlp import Taskflow
 ```
 
 加载自定义词典及输出结果示例：
-
 ```python
 >>> from paddlenlp import Taskflow
 >>> seg = Taskflow("word_segmentation")
@@ -143,22 +135,18 @@ from paddlenlp import Taskflow
 >>> seg("平原上的火焰计划于年末上映")
 ['平原上的火焰', '宣布', '延期', '上', '映']
 ```
-
 #### 参数说明
-
 * `mode`：指定分词模式，默认为None。
 * `batch_size`：批处理大小，请结合机器情况进行调整，默认为1。
 * `user_dict`：自定义词典文件路径，默认为None。
 * `task_path`：自定义任务路径，默认为None。
-  </div></details>
+</div></details>
 
 ### 词性标注
 
 <details><summary>&emsp;基于百度词法分析工具LAC</summary><div>
 
-
 #### 支持单条和批量预测
-
 ```python
 >>> from paddlenlp import Taskflow
 # 单条预测
@@ -206,18 +194,15 @@ from paddlenlp import Taskflow
 >>> my_tag("赛里木湖是新疆海拔最高的高山湖泊")
 [('赛里木湖', 'LAKE'), ('是', 'v'), ('新疆', 'LOC'), ('海拔最高', 'n'), ('的', 'u'), ('高', 'a'), ('山', 'n'), ('湖泊', 'n')]
 ```
-
 #### 可配置参数说明
-
 * `batch_size`：批处理大小，请结合机器情况进行调整，默认为1。
 * `user_dict`：用户自定义词典文件，默认为None。
 * `task_path`：自定义任务路径，默认为None。
-  </div></details>
+</div></details>
 
 ### 命名实体识别
 
 <details><summary>&emsp;最全中文实体标签</summary><div>
-
 
 #### 支持两种模式
 
@@ -240,7 +225,6 @@ from paddlenlp import Taskflow
 ```
 
 #### 批量样本输入，平均速度更快
-
 ```python
 >>> from paddlenlp import Taskflow
 >>> ner = Taskflow("ner")
@@ -255,7 +239,6 @@ from paddlenlp import Taskflow
 包含66种词性及专名类别标签，标签集合如下表：
 
 <table>
-
 
 <tr><th colspan='6'>WordTag标签集合
 <tr><td>人物类_实体<td>物体类<td>生物类_动物<td>医学术语类<td>链接地址<td>肯定词
@@ -314,15 +297,13 @@ from paddlenlp import Taskflow
 ```
 
 #### 可配置参数说明
-
 * `batch_size`：批处理大小，请结合机器情况进行调整，默认为1。
 * `user_dict`：用户自定义词典文件，默认为None。
 * `task_path`：自定义任务路径，默认为None。
-  </div></details>
+</div></details>
 
 
 ### 依存句法分析
-
 <details><summary>&emsp;基于最大规模中文依存句法树库研发的DDParser </summary><div>
 
 #### 支持多种形式输入
@@ -409,7 +390,6 @@ from paddlenlp import Taskflow
 |  HED  |  核心关系  | 指整个句子的核心         |                                |
 
 #### 可配置参数说明
-
 * `batch_size`：批处理大小，请结合机器情况进行调整，默认为1。
 * `model`：选择任务使用的模型，可选有`ddparser`，`ddparser-ernie-1.0`和`ddparser-ernie-gram-zh`。
 * `tree`：确保输出结果是正确的依存句法树，默认为True。
@@ -418,12 +398,10 @@ from paddlenlp import Taskflow
 * `use_cuda`：是否使用GPU进行切词，默认为False。
 * `return_visual`：是否返回句法树的可视化结果，默认为False。
 * `task_path`：自定义任务路径，默认为None。
-  </div></details>
+</div></details>
 
 ### 解语知识标注
-
 <details><summary>&emsp;覆盖所有中文词汇的知识标注工具</summary><div>
-
 
 #### 词类知识标注
 
@@ -435,16 +413,15 @@ from paddlenlp import Taskflow
 ```
 
 **可配置参数说明：**
-
 * `batch_size`：批处理大小，请结合机器情况进行调整，默认为1。
 * `linking`：实现基于词类的linking，默认为True。
 * `task_path`：自定义任务路径，默认为None。
 * `user_dict`：用户自定义词典文件，默认为None。
+  
 
 知识挖掘-词类知识标注任务共包含66种词性及专名类别标签，标签集合如下表：
 
 <table>
-
 
 <tr><th colspan='6'>WordTag标签集合
 <tr><td>人物类_实体<td>物体类<td>生物类_动物<td>医学术语类<td>链接地址<td>肯定词
@@ -463,7 +440,6 @@ from paddlenlp import Taskflow
 
 
 #### 名词短语标注
-
 ```python
 >>> from paddlenlp import Taskflow
 >>> nptag = Taskflow("knowledge_mining", model="nptag")
@@ -478,18 +454,16 @@ nptag(["糖醋排骨", "红曲霉菌"])
 >>> nptag(["糖醋排骨", "红曲霉菌"])
 [{'text': '糖醋排骨', 'label': '菜品', 'category': '饮食类_菜品'}, {'text': '红曲霉菌', 'label': '微生物', 'category': '生物类_微生物'}]
 ```
-
 **可配置参数说明：**
-
 * `batch_size`：批处理大小，请结合机器情况进行调整，默认为1。
 * `max_seq_len`：最大序列长度，默认为64。
 * `linking`：实现与WordTag类别标签的linking，默认为False。
 * `task_path`：自定义任务路径，默认为None。
+  
 
 </div></details>
 
 ### 文本纠错
-
 <details><summary>&emsp;融合拼音特征的端到端文本纠错模型ERNIE-CSC</summary><div>
 
 
@@ -509,15 +483,12 @@ nptag(["糖醋排骨", "红曲霉菌"])
 ```
 
 #### 可配置参数说明
-
 * `batch_size`：批处理大小，请结合机器情况进行调整，默认为1。
 * `task_path`：自定义任务路径，默认为None。
-  </div></details>
+</div></details>
 
 ### 文本相似度
-
 <details><summary>&emsp;基于百度知道2200万对相似句组训练SimBERT达到前沿文本相似效果</summary><div>
-
 
 #### 单条输入
 
@@ -537,16 +508,13 @@ nptag(["糖醋排骨", "红曲霉菌"])
 ```
 
 #### 可配置参数说明
-
 * `batch_size`：批处理大小，请结合机器情况进行调整，默认为1。
 * `max_seq_len`：最大序列长度，默认为128。
 * `task_path`：自定义任务路径，默认为None。
-  </div></details>
+</div></details>
 
 ### 情感倾向分析
-
 <details><summary>&emsp;基于情感知识增强预训练模型SKEP达到业界SOTA </summary><div>
-
 
 #### 支持不同模型，速度快和精度高两种模式
 
@@ -564,7 +532,6 @@ nptag(["糖醋排骨", "红曲霉菌"])
 ```
 
 #### 批量样本输入，平均速度更快
-
 ```python
 >>> from paddlenlp import Taskflow
 >>> senta(["这个产品用起来真的很流畅，我非常喜欢", "作为老的四星酒店，房间依然很整洁，相当不错。机场接机服务很好，可以在车上办理入住手续，节省时间"])
@@ -572,16 +539,13 @@ nptag(["糖醋排骨", "红曲霉菌"])
 ```
 
 #### 可配置参数说明
-
 * `batch_size`：批处理大小，请结合机器情况进行调整，默认为1。
 * `model`：选择任务使用的模型，可选有`bilstm`和`skep_ernie_1.0_large_ch`。
 * `task_path`：自定义任务路径，默认为None。
-  </div></details>
+</div></details>
 
 ### 生成式问答
-
 <details><summary>&emsp; 使用最大中文开源CPM模型完成问答</summary><div>
-
 
 #### 支持单条、批量预测
 
@@ -597,14 +561,11 @@ nptag(["糖醋排骨", "红曲霉菌"])
 ```
 
 #### 可配置参数说明
-
 * `batch_size`：批处理大小，请结合机器情况进行调整，默认为1。
-  </div></details>
+</div></details>
 
 ### 智能写诗
-
 <details><summary>&emsp; 使用最大中文开源CPM模型完成写诗 </summary><div>
-
 
 #### 支持单条、批量预测
 
@@ -620,17 +581,13 @@ nptag(["糖醋排骨", "红曲霉菌"])
 ```
 
 #### 可配置参数说明
-
 * `batch_size`：批处理大小，请结合机器情况进行调整，默认为1。
-  </div></details>
+</div></details>
 
 ### 开放域对话
-
 <details><summary>&emsp;十亿级语料训练最强中文闲聊模型PLATO-Mini，支持多轮对话</summary><div>
 
-
 #### 非交互模式
-
 ```python
 >>> from paddlenlp import Taskflow
 >>> dialogue = Taskflow("dialogue")
@@ -647,7 +604,6 @@ nptag(["糖醋排骨", "红曲霉菌"])
 * `max_seq_len`：最大序列长度，默认为512。
 
 #### 交互模式
-
 ```python
 >>> from paddlenlp import Taskflow
 
@@ -666,16 +622,13 @@ nptag(["糖醋排骨", "红曲霉菌"])
 ```
 
 交互模式参数：
-
 * `max_turn`：任务能记忆的对话轮数，当max_turn为1时，模型只能记住当前对话，无法获知之前的对话内容。
   </div></details>
 
   
-
 ## PART Ⅱ &emsp; 定制化训练
 
 <details><summary>适配任务列表</summary><div>
-
 
 如果你有自己的业务数据集，可以对模型效果进一步调优，支持定制化训练的任务如下：
 
@@ -696,7 +649,6 @@ nptag(["糖醋排骨", "红曲霉菌"])
 
 <details><summary>定制化训练示例</summary><div>
 
-
 这里我们以命名实体识别`Taskflow("ner", mode="accurate")`为例，展示如何定制自己的模型。
 
 调用`Taskflow`接口后，程序自动将相关文件下载到`$HOME/.paddlenlp/taskflow/ner/wordtag/`，该默认路径包含以下文件:
@@ -711,7 +663,7 @@ $HOME/.paddlenlp/taskflow/ner/wordtag/
 * 参考上表中对应[示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/ernie-ctm)准备数据集和标签文件`tags.txt`，执行相应训练脚本得到自己的`model_state.pdparams`和`model_config.json`。
 
 * 根据自己数据集情况，修改标签文件`tags.txt`。
-
+  
 * 将以上文件保存到任意路径中，自定义路径下的文件需要和默认路径的文件一致:
 
 ```text
@@ -720,35 +672,29 @@ custom_task_path/
 ├── model_config.json # 定制模型配置文件
 └── tags.txt # 定制标签文件
 ```
-
 * 通过`task_path`指定自定义路径，使用Taskflow加载自定义模型进行一键预测：
 
 ```python
 from paddlenlp import Taskflow
 my_ner = Taskflow("ner", mode="accurate", task_path="./custom_task_path/")
 ```
-
 </div></details>
 
 ## FAQ
 
 <details><summary><b>Q：</b>Taskflow如何修改任务保存路径？</summary><div>
 
-
 **A:** Taskflow默认会将任务相关模型等文件保存到`$HOME/.paddlenlp`下，可以在任务初始化的时候通过`home_path`自定义修改保存路径。示例：
-
 ```python
 from paddlenlp import Taskflow
 
 ner = Taskflow("ner", home_path="/workspace")
 ```
-
 通过以上方式即可将ner任务相关文件保存至`/workspace`路径下。
 </div></details>
 
 
 <details><summary><b>Q：</b>下载或调用模型失败，多次下载均失败怎么办？</summary><div>
-
 
 **A:** Taskflow默认会将任务相关模型等文件保存到`$HOME/.paddlenlp/taskflow`下，如果下载或调用失败，可删除相应路径下的文件，重新尝试即可
 
@@ -756,7 +702,6 @@ ner = Taskflow("ner", home_path="/workspace")
 
 
 <details><summary><b>Q：</b>后续会增加更多任务支持吗？</summary><div>
-
 **A:** Taskflow支持任务持续丰富中，我们将根据开发者反馈，灵活调整功能建设优先级，可通过Issue或[问卷](https://wenjuan.baidu-int.com/manage/?r=survey/pageEdit&sid=85827)反馈给我们。
 
 </div></details>
