@@ -684,13 +684,13 @@ my_ner = Taskflow("ner", mode="accurate", task_path="./custom_task_path/")
 <details><summary>模型算法说明</summary><div>	
 	
 <table> 
-  <tr><td>任务名称<td>模型<td>模型详情
-  <tr><td rowspan="3">中文分词<td>默认模式模型: BiGRU+CRF<td>  <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/lexical_analysis"> 训练详情
-  <tr><td>快速模式：XXX<td> link
-  <tr><td>精准模式：XXX<td> link
-  <tr><td>词性标注<td>XXX<td>link
-  <tr><td rowspan="2">命名实体识别<td>默认模式：XXX<td>link
-  <tr><td>精准模式：XXX<td> link
+  <tr><td>任务名称<td>模型<td>模型详情<td>训练集
+  <tr><td rowspan="3">中文分词<td>默认模式模型: BiGRU+CRF<td>  <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/lexical_analysis"> 训练详情 <td> 训练集说明
+  <tr><td>快速模式：XXX<td> link <td> 训练集说明
+  <tr><td>精准模式：XXX<td> link <td> 训练集说明
+  <tr><td>词性标注<td>XXX<td>link <td> 训练集说明
+  <tr><td rowspan="2">命名实体识别<td>默认模式：XXX<td>link <td> 训练集说明
+  <tr><td>精准模式：XXX<td> link <td> 训练集说明
 </table>
 	
 </div></details>	
