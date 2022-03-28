@@ -1,3 +1,27 @@
+<table>
+  <tr>
+    <td rowspan="2">中文分词</td>
+	  <td>默认模式模型: BiGRU+CRF</td>
+    <td>  <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/lexical_analysis"> 训练详情 </td>
+  </tr>
+  <tr>
+	  <td>February</td>
+    <td>$100</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Sum: $18000</td>
+	  <td>February</td>
+    <td>$100</td>
+  </tr>
+  <tr>
+	  <td>February</td>
+    <td>$100</td>
+  </tr>
+</table>
+  
+  
+  
+  
 <div align="center">  
   <h1> PaddleNLP 一键预测功能 </h1>
 </div>
@@ -678,7 +702,16 @@ from paddlenlp import Taskflow
 my_ner = Taskflow("ner", mode="accurate", task_path="./custom_task_path/")
 ```
 </div></details>
+  
+## 模型算法
+  
+<table>
 
+<tr><th colspan='6'>WordTag标签集合
+<tr><td>人物类_实体<td>物体类<td>生物类_动物<td>医学术语类<td>链接地址<td>肯定词
+<tr><td>人物类_概念<td>物体类_兵器<td>品牌名<td>术语类_生物体<td>个性特征<td>否定词
+
+</table>
 
 ## FAQ
 
