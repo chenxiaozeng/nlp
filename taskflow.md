@@ -1,9 +1,6 @@
-<div align="center">  
-  <h1> PaddleNLP 一键预测功能 </h1>
-</div>
+# PaddleNLP 一键预测功能: Taskflow API
 
-
-<p align="center">
+<p align="left">
     <a href="https://pypi.org/project/paddlenlp/"><img src="https://img.shields.io/pypi/v/paddlenlp.svg?label=pip&logo=PyPI&logoColor=white"></a>
     <a href="https://github.com/PaddlePaddle/PaddleNLP/releases"><img src="https://img.shields.io/github/v/release/PaddlePaddle/PaddleNLP?color=ffa"></a>
     <a href="https://pypi.org/project/paddlenlp/"><img src="https://img.shields.io/pypi/pyversions/paddlenlp"></a>
@@ -12,7 +9,7 @@
 </p>
 
 
-<h4 align="center">
+<h4 align="left">
   <a href=#QuickStart> QuickStart </a> |
   <a href=#社区交流> 社区交流 </a> |
   <a href=#详细使用> 一键预测&定制训练 </a> |
@@ -52,6 +49,9 @@ PaddleNLP提供**开箱即用**的产业级NLP预置任务能力，无需训练�
 
 ![taskflow1](https://user-images.githubusercontent.com/11793384/159693816-fda35221-9751-43bb-b05c-7fc77571dd76.gif)
 
+可进入 Jupyter Notebook 环境，在线体验 👉🏻  [进入在线运行环境](https://aistudio.baidu.com/aistudio/projectdetail/3696243)
+
+PaddleNLP Taskflow API 支持任务持续丰富中，我们将根据开发者反馈，灵活调整功能建设优先级，可通过Issue或[问卷](https://iwenjuan.baidu.com/?code=44amg8)反馈给我们。
 
 ## 社区交流
 
@@ -62,10 +62,6 @@ PaddleNLP提供**开箱即用**的产业级NLP预置任务能力，无需训练�
 </div>
 
 ## 详细使用
-
-可进入 Jupyter Notebook 环境，在线体验 👉🏻  [进入在线运行环境](https://aistudio.baidu.com/aistudio/projectdetail/3494205)
-
-Taskflow支持任务持续丰富中，我们将根据开发者反馈，灵活调整功能建设优先级，可通过Issue或[问卷](https://iwenjuan.baidu.com/?code=44amg8)反馈给我们。
 
 ## PART Ⅰ &emsp; 一键预测
 
@@ -645,7 +641,7 @@ nptag(["糖醋排骨", "红曲霉菌"])
 
 </div></details>  
 
-	
+
 <details><summary>定制化训练示例</summary><div>
 
 这里我们以命名实体识别`Taskflow("ner", mode="accurate")`为例，展示如何定制自己的模型。
@@ -678,23 +674,8 @@ from paddlenlp import Taskflow
 my_ner = Taskflow("ner", mode="accurate", task_path="./custom_task_path/")
 ```
 </div></details>
-  
-## 模型算法
-	
-<details><summary>模型算法说明</summary><div>	
-	
-<table> 
-  <tr><td>任务名称<td>模型<td>模型详情<td>训练集
-  <tr><td rowspan="3">中文分词<td>默认模式模型: BiGRU+CRF<td>  <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/lexical_analysis"> 训练详情 <td> 训练集说明
-  <tr><td>快速模式：XXX<td> link <td> 训练集说明
-  <tr><td>精准模式：XXX<td> link <td> 训练集说明
-  <tr><td>词性标注<td>XXX<td>link <td> 训练集说明
-  <tr><td rowspan="2">命名实体识别<td>默认模式：XXX<td>link <td> 训练集说明
-  <tr><td>精准模式：XXX<td> link <td> 训练集说明
-</table>
-	
-</div></details>	
-	
+
+
 ## FAQ
 
 <details><summary><b>Q：</b>Taskflow如何修改任务保存路径？</summary><div>
