@@ -85,7 +85,7 @@
 
 **恭喜你开启了愉快的NLP之旅！**
 
-**加入打卡活动群**（二维码7天有效，如无法进群，可前往PaddleNLP GitHub主页获取最新二维码[https://github.com/PaddlePaddle/PaddleNLP](https://github.com/PaddlePaddle/PaddleNLP) ）：
+**加入打卡活动群**（二维码7天有效，如无法进群，可前往PaddleNLP GitHub[主页](https://github.com/PaddlePaddle/PaddleNLP)获取最新二维码 ）：
  
  ![image](https://user-images.githubusercontent.com/11793384/160795335-9b72416a-467b-4df1-ae03-a1cfc45ebffc.png)
 
