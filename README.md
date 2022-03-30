@@ -98,4 +98,6 @@
 
 如有更多需求、吐槽、建议，或寻求开源技术合作，欢迎通过问卷或群交流反馈给PaddleNLP团队：https://iwenjuan.baidu.com/?code=44amg8
 
+记得star收藏下[PaddleNLP](https://github.com/PaddlePaddle/PaddleNLP)，第一时间了解最新功能哦，感谢你的喜爱与支持。
+
 **祝你的NLP之旅愉快！**
