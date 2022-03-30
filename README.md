@@ -1,6 +1,15 @@
 # NLP十一大任务打卡活动
 
-## step1: 启动环境
+[step1: 启动环境](#step1启动环境) 
+
+[step2: 运行项目](#step2运行项目) 
+
+[step3: 完成作业](#step3完成作业) 
+
+[step4: 完成打卡](#step4完成打卡) 
+
+
+## step1启动环境
 进入PaddleNLP官方项目：
 🔗：[https://aistudio.baidu.com/aistudio/projectdetail/3696243](https://aistudio.baidu.com/aistudio/projectdetail/3696243)
 
@@ -20,7 +29,7 @@
 ![image](https://user-images.githubusercontent.com/11793384/160789736-d7bfbc2a-c165-494c-9b87-acde7f99a4b3.png)
 
  
-## step2: 运行项目
+## step2运行项目
 环境启动成功后，将会看到PaddleNLP一键预测功能 Taskflow API 的使用教程。点击“运行全部”按钮，将自动逐行运行教程中所有代码。
 
 ![image](https://user-images.githubusercontent.com/11793384/160790696-db55bb7f-d4bd-4065-b478-777d83a41110.png)
@@ -31,19 +40,19 @@
 
 运行成功后，你就掌握PaddleNLP一键预测功能的使用方法了，非常简单！
 
-## step3: 完成作业
+## step3完成作业
 
 **作业题目说明（完成作业有奖哦！）**
 
 **要求：在微信群中提交自己的AI Studio项目或者运行成功的截图。**
 
-**（1）题目1：** 知识问答、写诗二选一，完成 【一键预测】任务；
+**（1）题目1：** NLP任务选其一，更换input，完成 【一键预测】任务；
 
 **（2）题目2——附加题目（可选）：** 用自己的数据集重训11个任务中任一一个，体验【定制化训练】功能。附：[参考文档了解哪些任务支持定制化训练](https://github.com/PaddlePaddle/PaddleNLP/blob/develop/docs/model_zoo/taskflow.md#%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8)
 
 备注：
 
-由于一个notebook环境里，下载的模型太多了，空间不够，需要新建一个项目运行写诗或问答项目；或者在自己的开发机上也可以。
+如果下载的模型太多，空间不够，新建一个项目即可，或者在自己的开发机上也可以。
 
 如何新建项目呢？
 
@@ -72,7 +81,9 @@
  ![image](https://user-images.githubusercontent.com/11793384/160794471-707b6f39-2474-4c5d-822d-30b605f06639.png)
 
 
-## Step4: 提交作业，完成打卡活动，恭喜你开启了愉快的NLP之旅！
+## step4完成打卡
+
+**恭喜你开启了愉快的NLP之旅！**
 
 **加入打卡活动群**（二维码7天有效，如无法进群，可前往PaddleNLP GitHub主页获取最新二维码[https://github.com/PaddlePaddle/PaddleNLP](https://github.com/PaddlePaddle/PaddleNLP) ）：
  
