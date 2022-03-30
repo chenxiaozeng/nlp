@@ -100,4 +100,6 @@
 
 记得star收藏下[PaddleNLP](https://github.com/PaddlePaddle/PaddleNLP)，第一时间了解最新功能哦，感谢你的喜爱与支持。
 
+![ebb9f7dd4ac096f94d4a224eeb861c7e](https://user-images.githubusercontent.com/11793384/160803014-d3fa0551-6cb5-429f-ae3b-27e7b171c0a5.png)
+
 **祝你的NLP之旅愉快！**
