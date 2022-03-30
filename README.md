@@ -96,7 +96,7 @@
 
 备注：一定要记得公开项目呀，否则其他人是看不到项目内容的。
 
-如有更多需求、吐槽、建议，或寻求开源技术合作，欢迎通过问卷或群交流反馈给PaddleNLP团队：https://iwenjuan.baidu.com/?code=44amg8
+如有更多需求、吐槽、建议，或寻求开源技术合作，欢迎通过[问卷](https://iwenjuan.baidu.com/?code=44amg8)或群交流反馈给PaddleNLP团队。
 
 记得star收藏下[PaddleNLP](https://github.com/PaddlePaddle/PaddleNLP)，第一时间了解最新功能哦，感谢你的喜爱与支持。
 
