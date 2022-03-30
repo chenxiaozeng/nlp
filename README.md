@@ -83,8 +83,6 @@
 
 **【打卡】题目xxx：自己的AI Studio项目链接 或者 运行结果截图**
 
-例：【打卡】题目2：https://aistudio.baidu.com/aistudio/projectdetail/3696243
-
 备注：一定要记得公开项目呀，否则其他人是看不到项目内容的。
 
 如有更多需求、吐槽、建议，或寻求开源技术合作，欢迎通过问卷或群交流反馈给PaddleNLP团队：https://iwenjuan.baidu.com/?code=44amg8
