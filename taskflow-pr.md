@@ -55,7 +55,7 @@ PaddleNLP提供**开箱即用**的产业级NLP预置任务能力，无需训练�
 | [情感倾向分析](#情感倾向分析) |  `Taskflow("sentiment_analysis")` | ✅ | ✅ | ✅ |  | ✅  |  | 
 | [生成式问答](#生成式问答) |  `Taskflow("question_answering")` | ✅ | ✅ | ✅ |  |  |  | 
 | [智能写诗](#智能写诗)  |  `Taskflow("poetry_generation")` | ✅ | ✅ | ✅ |  |  |  | 
-| [开放域对话](#开放域对话) |  `Taskflow("dialogue")` | ✅ | ✅ | ✅ |  | ✅ | -Mini，支持多轮对话 |
+| [开放域对话](#开放域对话) |  `Taskflow("dialogue")` | ✅ | ✅ | ✅ |  |  | -Mini，支持多轮对话 |
 
 
 
