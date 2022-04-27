@@ -48,7 +48,7 @@
 
 ### 输入说明
 
-1.自定义prompt的技巧
+1. 自定义prompt的技巧
 
 本算子的抽取效果和用户构造的抽取目标prompt直接相关。所以使用时建议多尝试prompt的不同说法，查看效果。一般来说建议prompt尽量和原文类似，比如(这个case不好，太规则了)：
 ```
@@ -63,7 +63,7 @@
 ![image](https://user-images.githubusercontent.com/11793384/165436570-57f5d3db-fbda-409c-9be7-4bf20d5b48ed.png)
 
 
-2. 输入Schema说明
+3. 输入Schema说明
 
 | 任务 | Schema说明     |
 | ---- | -------- |
@@ -78,8 +78,6 @@
 
 <a name="定制训练"></a>
 ## 定制训练
-
-## 快速开始
 
 ### 代码结构说明
 
