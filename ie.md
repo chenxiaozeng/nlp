@@ -3,10 +3,29 @@
 **开放域信息抽取的介绍**......
 
 **UIE的介绍**....Unified Information Extraction（UIE）将各种类型的信息抽取任务统一转化为自然语言的形式，并进行多任务联合训练。利用单一模型支持多种类型的开放抽取任务，用户可以使用自然语言自定义抽取目标，无需训练即可抽取输入文本中的对应信息。该模型支持多种类型的开放抽取任务，包括但不限于命名实体、关系、事件论元、事件描述片段、评价、评价维度、观点词、情感倾向等...
+<details><summary>&emsp; UIE原理介绍 </summary><div>
+ 该算子的技术方案是，将各种类型的信息抽取任务统一转化为自然语言的形式，并进行多任务联合训练，进而支持零样本信息抽取。模型的输入是待抽取文本（content）和自然语言描述的抽取目标（prompt），prompt通常建议的结构为“A的B”或“B”的形式，如下例子：
+    <img src="https://user-images.githubusercontent.com/11793384/165440075-53487b01-692d-4f2e-b4e6-7dbd26bca28d.png" align="middle">
+    <img src="https://user-images.githubusercontent.com/11793384/165440110-1d40b7f8-a490-4ba8-99eb-2cf607386a84.png" align="middle">
+</div></details>
+    
+**支持任务列表、应用场景和效果展示**
+- 实体抽取
+- 关系抽取
+- 事件抽取
+- 评论观点抽取
+- 情感倾向判断
 
-**支持
-**UIE的介绍**....Unified Information Extraction（UIE）将各种类型的信息抽取任务统一转化为自然语言的形式，并进行多任务联合训练。利用单一模型支持多种类型的开放抽取任务，用户可以使用自然语言自定义抽取目标，无需训练即可抽取输入文本中的对应信息。该模型支持多种类型的开放抽取任务，包括但不限于命名实体、关系、事件论元、事件描述片段、评价、评价维度、观点词、情感倾向等...
-**UIE的介绍**....Unified Information Extraction（UIE）将各种类型的信息抽取任务统一转化为自然语言的形式，并进行多任务联合训练。利用单一模型支持多种类型的开放抽取任务，用户可以使用自然语言自定义抽取目标，无需训练即可抽取输入文本中的对应信息。该模型支持多种类型的开放抽取任务，包括但不限于命名实体、关系、事件论元、事件描述片段、评价、评价维度、观点词、情感倾向等.
+可应用于但不限于医疗、金融、政务等多个垂直领域....
+
+<details><summary>&emsp; 应用场景和效果展示 </summary><div>
+
+ <img src="https://user-images.githubusercontent.com/11793384/165439119-5f6a7562-9f6c-4a23-8c76-6d4177759201.png" align="middle">
+    <img src="https://user-images.githubusercontent.com/11793384/165439567-b05da240-1155-49d8-a0c9-f1e11d0b9099.png" align="middle">
+    <img src="https://user-images.githubusercontent.com/11793384/165439514-ceeceafc-b782-4ed7-b8bd-f4c4f901e759.png" align="middle">
+    <img src="" align="middle">
+</div></details>
+
 
 为了方便使用，我们提供了一键预测功能，以及定制训练功能。
 
@@ -38,7 +57,13 @@
 | 评论观点抽取 | |
 | 情感倾向判断 | |
 
+## 输出说明
+....
 
+## 一键预测功能
+链接到taskflow文档...
+
+## 定制训练
 
 ## 快速开始
 
