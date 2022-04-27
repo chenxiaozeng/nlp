@@ -1,5 +1,6 @@
 # PaddleNLP一键预测功能：Taskflow API
 
+
 <p align="left">
     <a href="https://pypi.org/project/paddlenlp/"><img src="https://img.shields.io/pypi/v/paddlenlp.svg?label=pip&logo=PyPI&logoColor=white"></a>
     <a href="https://github.com/PaddlePaddle/PaddleNLP/releases"><img src="https://img.shields.io/github/v/release/PaddlePaddle/PaddleNLP?color=ffa"></a>
@@ -16,6 +17,7 @@
   <a href=#FAQ> FAQ </a>
 </h4>
 
+
 ------------------------------------------------------------------------------------------
 
 ## 特性
@@ -30,13 +32,14 @@ PaddleNLP提供**开箱即用**的产业级NLP预置任务能力，无需训练�
 | [词性标注](#词性标注)              | `Taskflow("pos_tagging")`        | ✅        | ✅        | ✅        | ✅          | ✅          | 基于百度前沿词法分析工具LAC                            |
 | [命名实体识别](#命名实体识别)      | `Taskflow("ner")`                | ✅        | ✅        | ✅        | ✅          | ✅          | 覆盖最全中文实体标签                                   |
 | [依存句法分析](#依存句法分析)      | `Taskflow("dependency_parsing")` | ✅        | ✅        | ✅        |            | ✅          | 基于最大规模中文依存句法树库研发的DDParser             |
+| [信息抽取](#信息抽取) | `Taskflow("information_extraction")`   | ✅        | ✅        | ✅        | ✅          |           | 适配多场景的开放域通用信息抽取工具                     |
 | [『解语』-知识标注](#解语知识标注) | `Taskflow("knowledge_mining")`   | ✅        | ✅        | ✅        | ✅          | ✅          | 覆盖所有中文词汇的知识标注工具                         |
 | [文本纠错](#文本纠错)              | `Taskflow("text_correction")`    | ✅        | ✅        | ✅        | ✅          | ✅          | 融合拼音特征的端到端文本纠错模型ERNIE-CSC              |
 | [文本相似度](#文本相似度)          | `Taskflow("text_similarity")`    | ✅        | ✅        | ✅        |            |            | 基于百度知道2200万对相似句组训练                       |
 | [情感倾向分析](#情感倾向分析)      | `Taskflow("sentiment_analysis")` | ✅        | ✅        | ✅        |            | ✅          | 基于情感知识增强预训练模型SKEP达到业界SOTA             |
 | [生成式问答](#生成式问答)          | `Taskflow("question_answering")` | ✅        | ✅        | ✅        |            |            | 使用最大中文开源CPM模型完成问答                        |
 | [智能写诗](#智能写诗)              | `Taskflow("poetry_generation")`  | ✅        | ✅        | ✅        |            |            | 使用最大中文开源CPM模型完成写诗                        |
-| [开放域对话](#开放域对话)          | `Taskflow("dialogue")`           | ✅        | ✅        | ✅        |            | ✅          | 十亿级语料训练最强中文闲聊模型PLATO-Mini，支持多轮对话 |
+| [开放域对话](#开放域对话)          | `Taskflow("dialogue")`           | ✅        | ✅        | ✅        |            |            | 十亿级语料训练最强中文闲聊模型PLATO-Mini，支持多轮对话 |
 
 
 ## QuickStart
@@ -392,6 +395,141 @@ from paddlenlp import Taskflow
 * `task_path`：自定义任务路径，默认为None。
 </div></details>
 
+### 信息抽取
+<details><summary>&emsp; 适配多场景的开放域通用信息抽取工具 </summary><div>
+
+开放域信息抽取(OIE)是信息抽取的一种全新的范式，主要思想是减少人工参与，利用单一模型支持多种类型的开放抽取任务，用户可以使用自然语言自定义抽取目标，在实体、关系类别等未定义的情况下抽取输入文本中的信息片段。
+
+#### 支持多场景信息抽取任务
+
+- 命名实体识别
+
+  命名实体识别（Named Entity Recognition，简称NER），是指识别文本中具有特定意义的实体。在开放域信息抽取中，用户可以制定任意实体类型作为抽取的目标。
+
+  例如抽取的目标实体类型是"出租方"和"承租方", schema构造如下：
+
+  ```text
+  ['出租方', '承租方']
+  ```
+
+  预测：
+
+  ```python
+  >>> from paddlenlp import Taskflow
+
+  >>> schema = ['出租方', '承租方'] # Define the schema for entity extraction
+  >>> ie = Taskflow('information_extraction', schema=schema)
+  >>> ie('出租方：小明 地址：筒子街12号 电话：12345678900　承租方：小红　地址：新华路8号 电话：1234500000')
+  [{'出租方': [{'text': '小明', 'start': 4, 'end': 6, 'probability': 0.9767557939143963}], '承租方': [{'text': '小红', 'start': 36, 'end': 38, 'probability': 0.9588206726186428}]}]
+  ```
+
+- 关系抽取
+
+  关系抽取（Relation Extraction，简称RE），是指从文本中识别实体并抽取实体之间的语义关系，即抽取三元组（entity1，关系类型，entity2）。
+
+  例如抽取的目标是"出租方的地址"、"出租方的电话"、"承租方的地址"和"承租方的电话", schema构造如下：
+
+  ```text
+  [{'出租方': ['地址', '电话'], '承租方': ['地址', '电话']}]
+  ```
+
+  预测：
+
+  ```python
+  >>> schema = [{"歌曲名称":["歌手", "所属专辑"]}] # Define the schema for relation extraction
+  >>> ie.set_schema(schema) # Reset schema
+  >>> ie("《告别了》是孙耀威在专辑爱的故事里面的歌曲")
+  [{'歌曲名称': [{'text': '告别了', 'start': 1, 'end': 4, 'probability': 0.7721050787207417, 'relations': {'歌手': [{'text': '孙耀威', 'start': 6, 'end': 9, 'probability': 0.9996328066160487}], '所属专辑': [{'text': '爱的故事', 'start': 12, 'end': 16, 'probability': 0.9981007942846247}]}}]}]
+  ```
+
+  在实体抽取中我们已经实例化了一个`Taskflow`对象，这里可以通过`set_schema`方法重置抽取目标。
+
+- 事件抽取
+
+  事件抽取 (Event Extraction, 简称EE)，是指从自然语言文本中抽取事件并识别事件类型和事件论元的技术。UIE所包含的事件抽取任务，是指根据已知事件类型，抽取该事件所包含的事件论元。
+
+  例如抽取的目标是"地震"的"地震强度"、"时间"、"震中位置"和"震源深度"，schema构造如下：
+
+  ```text
+  [{'地震触发词': ['地震强度', '时间', '震中位置', '震源深度']}]
+  ```
+
+  触发词的格式统一为`XX触发词`，`XX`表示具体事件类型，上例中的事件类型是`地震`，则对应触发词为`地震触发词`。
+
+  预测：
+
+  ```python
+  >>> schema = [{'地震触发词': ['地震强度', '时间', '震中位置', '震源深度']}] # Define the schema for event extraction
+  >>> ie.set_schema(schema) # Reset schema
+  >>> ie('中国地震台网正式测定：5月16日06时08分在云南临沧市凤庆县(北纬24.34度，东经99.98度)发生3.5级地震，震源深度10千米。')
+  [{'地震触发词': [{'text': '地震', 'start': 56, 'end': 58, 'probability': 0.9987181623528585, 'relation': {'地震强度': [{'text': '3.5级', 'start': 52, 'end': 56, 'probability': 0.9962985320905915}], '时间': [{'text': '5月16日06时08分', 'start': 11, 'end': 22, 'probability': 0.9882578028575182}], '震中位置': [{'text': '云南临沧市凤庆县(北纬24.34度，东经99.98度)', 'start': 23, 'end': 50, 'probability': 0.8551415716584501}], '震源深度': [{'text': '10千米', 'start': 63, 'end': 67, 'probability': 0.999158304648045}]}}]}]
+  ```
+
+- 评论观点抽取
+
+  评论观点抽取，是指抽取文本中包含的评价维度、观点词。
+
+  例如希望抽取文本中包含的评价维度以及对应的观点词，schema构造如下：
+
+  ```text
+  [{'评价维度': ['观点词']}]
+  ```
+
+  预测：
+
+  ```python
+  >>> schema = [{'评价维度': ['观点词']}] # Define the schema for opinion extraction
+  >>> ie.set_schema(schema) # Reset schema
+  >>> ie('个人觉得管理太混乱了，票价太高了')
+  [{'评价维度': [{'text': '管理', 'start': 4, 'end': 6, 'probability': 0.8902373594544031, 'relation': {'观点词': [{'text': '混乱', 'start': 7, 'end': 9, 'probability': 0.9993566520321409}]}}, {'text': '票价', 'start': 11, 'end': 13, 'probability': 0.9856116411308662, 'relation': {'观点词': [{'text': '高', 'start': 14, 'end': 15, 'probability': 0.995628420935013}]}}]}]
+  ```
+
+- 情感倾向分类
+
+  句子级情感倾向分类，即判断句子的情感倾向是“正向”还是“负向”，schema构造如下：
+
+  ```text
+  ['情感倾向[正向，负向]']
+  ```
+
+  预测：
+
+  ```python
+  >>> schema = ['情感倾向[正向，负向]'] # Define the schema for sentence-level sentiment classification
+  >>> ie.set_schema(schema) # Reset schema
+  >>> ie('这个产品用起来真的很流畅，我非常喜欢')
+  [{'情感倾向[正向，负向]': [{'text': '正向', 'probability': 0.9990110458312529}]}]
+  ```
+
+#### 多模型选择，满足精度、速度要求
+
+- 使用`UIE-Tiny`进行预测
+  ```python
+  >>> from paddlenlp import Taskflow
+
+  >>> schema = ['出租方', '承租方']
+  >>> ie = Taskflow('information_extraction', schema=schema, model="uie-medium")
+  >>> ie('出租方：小明 地址：筒子街12号 电话：12345678900　承租方：小红　地址：新华路8号 电话：1234500000')
+  [{'出租方': [{'text': '小明', 'start': 4, 'end': 6, 'probability': 0.9944859053454067}], '承租方': [{'text': '小红', 'start': 36, 'end': 38, 'probability': 0.8872193425652384}]}]
+  ```
+
+- 使用`UIE-Large`进行预测
+  ```python
+  >>> from paddlenlp import Taskflow
+
+  >>> schema = ['出租方', '承租方']
+  >>> ie = Taskflow('information_extraction', schema=schema, model="uie-large")
+  >>> ie('出租方：小明 地址：筒子街12号 电话：12345678900　承租方：小红　地址：新华路8号 电话：1234500000')
+  [{'出租方': [{'text': '小明', 'start': 4, 'end': 6, 'probability': 0.9979592241500157}], '承租方': [{'text': '小红', 'start': 36, 'end': 38, 'probability': 0.7938207126153785}]}]
+  ```
+
+#### 可配置参数说明
+* `batch_size`：批处理大小，请结合机器情况进行调整，默认为1。
+* `model`：选择任务使用的模型，默认为`uie-base`，可选有`uie-tiny`，`uie-base`和`uie-large`。
+* `schema`：定义任务抽取目标，可参考示例中对于不同信息抽取任务的schema配置自定义抽取目标。
+* `position_prob`：模型对于span的起始位置/终止位置的结果概率0~1之间，返回结果去掉小于这个阈值的结果，默认为0.5，span的最终概率输出为起始位置概率和终止位置概率的乘积。
+</div></details>
+
 ### 解语知识标注
 <details><summary>&emsp;覆盖所有中文词汇的知识标注工具</summary><div>
 
@@ -436,10 +574,10 @@ from paddlenlp import Taskflow
 >>> from paddlenlp import Taskflow
 >>> nptag = Taskflow("knowledge_mining", model="nptag")
 >>> nptag("糖醋排骨")
->>> [{'text': '糖醋排骨', 'label': '菜品'}]
+[{'text': '糖醋排骨', 'label': '菜品'}]
 
-nptag(["糖醋排骨", "红曲霉菌"])
->>> [{'text': '糖醋排骨', 'label': '菜品'}, {'text': '红曲霉菌', 'label': '微生物'}]
+>>> nptag(["糖醋排骨", "红曲霉菌"])
+[{'text': '糖醋排骨', 'label': '菜品'}, {'text': '红曲霉菌', 'label': '微生物'}]
 
 # 使用`linking`输出粗粒度类别标签`category`，即WordTag的词汇标签。
 >>> nptag = Taskflow("knowledge_mining", model="nptag", linking=True)
@@ -469,8 +607,7 @@ nptag(["糖醋排骨", "红曲霉菌"])
 [{'source': '遇到逆竟时，我们必须勇于面对，而且要愈挫愈勇。', 'target': '遇到逆境时，我们必须勇于面对，而且要愈挫愈勇。', 'errors': [{'position': 3, 'correction': {'竟': '境'}}]}]
 
 # 批量预测
->>> corrector(['遇到逆竟时，我们必须勇于面对，而且要愈挫愈勇。',
-                '人生就是如此，经过磨练才能让自己更加拙壮，才能使自己更加乐观。'])
+>>> corrector(['遇到逆竟时，我们必须勇于面对，而且要愈挫愈勇。', '人生就是如此，经过磨练才能让自己更加拙壮，才能使自己更加乐观。'])
 [{'source': '遇到逆竟时，我们必须勇于面对，而且要愈挫愈勇。', 'target': '遇到逆境时，我们必须勇于面对，而且要愈挫愈勇。', 'errors': [{'position': 3, 'correction': {'竟': '境'}}]}, {'source': '人生就是如此，经过磨练才能让自己更加拙壮，才能使自己更加乐观。', 'target': '人生就是如此，经过磨练才能让自己更加茁壮，才能使自己更加乐观。', 'errors': [{'position': 18, 'correction': {'拙': '茁'}}]}]
 ```
 
@@ -626,16 +763,17 @@ nptag(["糖醋排骨", "红曲霉菌"])
 
 |                           任务名称                           |                           默认路径                           |                                                              |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-|         `Taskflow("word_segmentation", mode="base")`         |      `$HOME/.paddlenlp/taskflow/word_segmentation/lac`       | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/lexical_analysis) |
-|       `Taskflow("word_segmentation", mode="accurate")`       |    `$HOME/.paddlenlp/taskflow/word_segmentation/wordtag`     | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/ernie-ctm) |
-|                `Taskflow("ner", mode="fast")`                |             `$HOME/.paddlenlp/taskflow/ner/lac`              | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/lexical_analysis) |
-|              `Taskflow("ner", mode="accurate")`              |           `$HOME/.paddlenlp/taskflow/ner/wordtag`            | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/ernie-ctm) |
-|     `Taskflow("text_correction", model="csc-ernie-1.0")`     |  `$HOME/.paddlenlp/taskflow/text_correction/csc-ernie-1.0`   | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_correction/ernie-csc) |
+|         `Taskflow("word_segmentation", mode="base")`         |             `$HOME/.paddlenlp/taskflow/lac`                  | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/lexical_analysis) |
+|       `Taskflow("word_segmentation", mode="accurate")`       |             `$HOME/.paddlenlp/taskflow/wordtag`              | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/ernie-ctm) |
+|       `Taskflow("pos_tagging")`                              |             `$HOME/.paddlenlp/taskflow/lac`                  | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/lexical_analysis) |
+|                `Taskflow("ner", mode="fast")`                |             `$HOME/.paddlenlp/taskflow/lac`                  | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/lexical_analysis) |
+|              `Taskflow("ner", mode="accurate")`              |             `$HOME/.paddlenlp/taskflow/wordtag`              | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/ernie-ctm) |
+|     `Taskflow("text_correction", model="ernie-csc")`     |  `$HOME/.paddlenlp/taskflow/text_correction/ernie-csc`   | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_correction/ernie-csc) |
 |      `Taskflow("dependency_parsing", model="ddparser")`      |   `$HOME/.paddlenlp/taskflow/dependency_parsing/ddparser`    | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/dependency_parsing/ddparser) |
 | `Taskflow("dependency_parsing", model="ddparser-ernie-1.0")` | `$HOME/.paddlenlp/taskflow/dependency_parsing/ddparser-ernie-1.0` | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/dependency_parsing/ddparser) |
 | `Taskflow("dependency_parsing", model="ddparser-ernie-gram-zh")` | `$HOME/.paddlenlp/taskflow/dependency_parsing/ddparser-ernie-gram-zh` | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/dependency_parsing/ddparser) |
 | `Taskflow("sentiment_analysis", model="skep_ernie_1.0_large_ch")` | `$HOME/.paddlenlp/taskflow/sentiment_analysis/skep_ernie_1.0_large_ch` | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/sentiment_analysis/skep) |
-|       `Taskflow("knowledge_mining", model="wordtag")`        |     `$HOME/.paddlenlp/taskflow/knowledge_mining/wordtag`     | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/ernie-ctm) |
+|       `Taskflow("knowledge_mining", model="wordtag")`        |             `$HOME/.paddlenlp/taskflow/wordtag`              | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/ernie-ctm) |
 |        `Taskflow("knowledge_mining", model="nptag")`         |      `$HOME/.paddlenlp/taskflow/knowledge_mining/nptag`      | [示例](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/nptag) |
 
 </div></details>  
@@ -645,10 +783,10 @@ nptag(["糖醋排骨", "红曲霉菌"])
 
 这里我们以命名实体识别`Taskflow("ner", mode="accurate")`为例，展示如何定制自己的模型。
 
-调用`Taskflow`接口后，程序自动将相关文件下载到`$HOME/.paddlenlp/taskflow/ner/wordtag/`，该默认路径包含以下文件:
+调用`Taskflow`接口后，程序自动将相关文件下载到`$HOME/.paddlenlp/taskflow/wordtag/`，该默认路径包含以下文件:
 
 ```text
-$HOME/.paddlenlp/taskflow/ner/wordtag/
+$HOME/.paddlenlp/taskflow/wordtag/
 ├── model_state.pdparams # 默认模型参数文件
 ├── model_config.json # 默认模型配置文件
 └── tags.txt # 默认标签文件
@@ -674,6 +812,31 @@ my_ner = Taskflow("ner", mode="accurate", task_path="./custom_task_path/")
 ```
 </div></details>
 
+## 模型算法
+
+<details><summary>模型算法说明</summary><div>
+
+<table>
+  <tr><td>任务名称<td>模型<td>模型详情<td>训练集
+  <tr><td rowspan="3">中文分词<td>默认模式: BiGRU+CRF<td>  <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/lexical_analysis"> 训练详情 <td> 百度自建数据集，包含近2200万句子，覆盖多种场景
+  <tr><td>快速模式：Jieba<td> - <td> -
+  <tr><td>精确模式：WordTag<td> <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/ernie-ctm"> 训练详情 <td> 百度自建数据集，词类体系基于TermTree构建
+  <tr><td>词性标注<td>BiGRU+CRF<td> <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/lexical_analysis"> 训练详情 <td> 百度自建数据集，包含2200万句子，覆盖多种场景
+  <tr><td rowspan="2">命名实体识别<td>精确模式：WordTag<td> <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/ernie-ctm"> 训练详情 <td> 百度自建数据集，词类体系基于TermTree构建
+  <tr><td>快速模式：BiGRU+CRF <td> <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/lexical_analysis"> 训练详情 <td> 百度自建数据集，包含2200万句子，覆盖多种场景
+  <tr><td>依存句法分析<td>DDParser<td> <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/dependency_parsing/ddparser"> 训练详情 <td> 百度自建数据集，DuCTB 1.0中文依存句法树库
+  <tr><td rowspan="2">解语知识标注<td>词类知识标注：WordTag<td> <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/ernie-ctm"> 训练详情 <td> 百度自建数据集，词类体系基于TermTree构建
+  <tr><td>名词短语标注：NPTag <td> <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_to_knowledge/nptag"> 训练详情 <td> 百度自建数据集
+  <tr><td>文本纠错<td>ERNIE-CSC<td> <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/text_correction/ernie-csc"> 训练详情 <td> SIGHAN简体版数据集及 <a href="https://github.com/wdimmy/Automatic-Corpus-Generation/blob/master/corpus/train.sgml"> Automatic Corpus Generation生成的中文纠错数据集
+  <tr><td>文本相似度<td>SimBERT<td> - <td> 收集百度知道2200万对相似句组
+  <tr><td rowspan="2">情感倾向分析<td> BiLSTM <td> - <td> 百度自建数据集
+  <tr><td> SKEP <td> <a href="https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/sentiment_analysis/skep"> 训练详情 <td> 百度自建数据集
+  <tr><td>生成式问答<td>CPM<td> - <td> 100GB级别中文数据
+  <tr><td>智能写诗<td>CPM<td> - <td> 100GB级别中文数据
+  <tr><td>开放域对话<td>PLATO-Mini<td> - <td> 十亿级别中文对话数据
+</table>
+
+</div></details>
 
 ## FAQ
 
@@ -695,6 +858,22 @@ ner = Taskflow("ner", home_path="/workspace")
 
 </div></details>
 
+<details><summary><b>Q：</b>Taskflow如何提升预测速度？</summary><div>
+
+**A:** 可以结合设备情况适当调整batch_size，采用批量输入的方式来提升平均速率。示例：
+```python
+from paddlenlp import Taskflow
+
+# 精确模式模型体积较大，可结合机器情况适当调整batch_size，采用批量样本输入的方式。
+seg_accurate = Taskflow("word_segmentation", mode="accurate", batch_size=32)
+
+# 批量样本输入，输入为多个句子组成的list，预测速度更快
+texts = ["热梅茶是一道以梅子为主要原料制作的茶饮", "《孤女》是2010年九州出版社出版的小说，作者是余兼羽"]
+seg_accurate(texts)
+```
+通过上述方式进行分词可以大幅提升预测速度。
+
+</div></details>
 
 <details><summary><b>Q：</b>后续会增加更多任务支持吗？</summary><div>
 
