@@ -7,6 +7,8 @@
 * [一键预测](#一键预测)
 * [定制训练](#定制训练)
 
+参考：nlpc算子文档 http://wiki.baidu.com/pages/viewpage.action?pageId=1633133811
+
 <a name="开放域信息抽取概述"></a>
 ## 开放域信息抽取和UIE概述
 
@@ -167,3 +169,4 @@ schema = [{"作品名": ["作者", "出版社名称"]}]
 # 为任务实例设定抽取目标和定制化模型权重路径
 my_ie = Taskflow("information_extraction", schema=schema, task_path='./checkpoint/model_best')
 ```
+
